@@ -1,0 +1,48 @@
+<div class="input_number">
+    <p id="para">Welcome!</p>
+    <input id="edtInput" />
+    <button onclick="onGuessClick()">Guess</button>
+    <button onclick="reset()">Reset</button>
+</div>
+
+<script>
+    var numb = Math.floor(Math.random() * 100)
+    var times = 10
+    function onGuessClick() {
+        if (times <= 0) {
+            return
+        }
+        var inputNumber = document.getElementById("edtInput").value
+        if (inputNumber == '') {
+            show("Please Input a Number")
+            return
+        }
+        if (inputNumber != numb) {
+            // wrong
+            var color = "rgb(255,0,0)"
+            times--
+            if (times == 0) {
+                show("You lose!!!")
+            } else {
+                if (inputNumber > numb) {
+                    show("Your guess was too high, guess lower. You have " + times + " guesses left", color)
+                } else {
+                    show("Your guess was too low, guess higher. You have " + times + " guesses left", color)
+                }
+            }
+        } else {
+            // correct
+            show("Correct", "rgb(0,255,0)")
+            times = 0
+        }
+    }
+
+    function reset() {
+        location.reload()
+    }
+
+    function show(text, color) {
+        document.getElementById("para").innerHTML = text
+        document.getElementById("para").style.background = color
+    }
+</script>
